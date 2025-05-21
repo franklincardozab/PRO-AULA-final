@@ -7,6 +7,9 @@ import io.bootify.connect_stay_book_new.repos.ReservasRepository;
 import io.bootify.connect_stay_book_new.repos.UsuarioRepository;
 import io.bootify.connect_stay_book_new.util.NotFoundException;
 import io.bootify.connect_stay_book_new.util.ReferencedWarning;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -84,5 +87,16 @@ public class UsuarioService {
             return referencedWarning;
         }
         return null;
+    }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public void registrarUsuario(Usuario usuario) {
+        // Encriptar contraseña antes de guardar
+        String passwordEncriptada = passwordEncoder.encode(usuario.getPassword());
+        usuario.setPassword(passwordEncriptada);
+
+        usuarioRepository.save(usuario);
     }
 }

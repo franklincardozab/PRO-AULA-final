@@ -19,18 +19,24 @@ public class JsonStringFormatter<T> extends TypeReference<T> implements Formatte
     }
 
     @Override
-    public T parse(final String text, final Locale locale) {
+    @org.springframework.lang.NonNull
+    public String print(@org.springframework.lang.NonNull final T object, @org.springframework.lang.NonNull final Locale locale) {
         try {
-            return objectMapper.readValue(text, this);
+            return objectMapper.writeValueAsString(object);
         } catch (final JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @Override
-    public String print(final T object, final Locale locale) {
+    @org.springframework.lang.NonNull
+    public T parse(@org.springframework.lang.NonNull final String text, @org.springframework.lang.NonNull final Locale locale) {
         try {
-            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+            T result = objectMapper.readValue(text, this);
+            if (result == null) {
+                throw new RuntimeException("Parsed value is null");
+            }
+            return result;
         } catch (final JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }

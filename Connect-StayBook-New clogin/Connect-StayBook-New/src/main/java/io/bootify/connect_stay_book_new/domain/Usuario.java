@@ -65,4 +65,12 @@ public class Usuario {
     public void setReservas(final Set<String> reservas) {
         this.reservas = reservas;
     }
+
+    public CharSequence getPassword() {
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
+
+    public void setPassword(String passwordEncriptada) {
+        throw new UnsupportedOperationException("Unimplemented method 'setPassword'");
+    }
 }

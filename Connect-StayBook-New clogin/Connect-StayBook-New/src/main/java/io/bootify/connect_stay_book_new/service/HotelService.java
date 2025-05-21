@@ -71,7 +71,7 @@ public class HotelService {
 
     public ReferencedWarning getReferencedWarning(final String id) {
         final ReferencedWarning referencedWarning = new ReferencedWarning();
-        final Hotel Hotel = hotelRepository.findById(id)
+        hotelRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
 
         // ✅ Corrección aquí
