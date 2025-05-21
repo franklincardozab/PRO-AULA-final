@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{reservas.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{reservas.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/reservass/add}" class="btn btn-primary ms-2">[[#{reservas.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${reservases.empty}">[[#{reservas.list.empty}]]</div>
+            <div th:if="${!reservases.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{reservas.id.label}]]</th>
+                            <th scope="col">[[#{reservas.fechaInicio.label}]]</th>
+                            <th scope="col">[[#{reservas.fechaFin.label}]]</th>
+                            <th scope="col">[[#{reservas.numerosPersonas.label}]]</th>
+                            <th scope="col">[[#{reservas.estado.label}]]</th>
+                            <th scope="col">[[#{reservas.usuario.label}]]</th>
+                            <th scope="col">[[#{reservas.pago.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="reservas : ${reservases}">
+                            <td>[[${reservas.id}]]</td>
+                            <td>[[${reservas.fechaInicio}]]</td>
+                            <td>[[${reservas.fechaFin}]]</td>
+                            <td>[[${reservas.numerosPersonas}]]</td>
+                            <td>[[${reservas.estado}]]</td>
+                            <td>[[${reservas.usuario}]]</td>
+                            <td>[[${reservas.pago}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/reservass/edit/{id}(id=${reservas.id})}" class="btn btn-sm btn-secondary">[[#{reservas.list.edit}]]</a>
+                                    <form th:action="@{/reservass/delete/{id}(id=${reservas.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{reservas.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

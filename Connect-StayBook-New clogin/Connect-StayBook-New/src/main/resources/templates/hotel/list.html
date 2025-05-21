@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{hotel.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{hotel.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/hotels/add}" class="btn btn-primary ms-2">[[#{hotel.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${hotels.empty}">[[#{hotel.list.empty}]]</div>
+            <div th:if="${!hotels.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{hotel.id.label}]]</th>
+                            <th scope="col">[[#{hotel.nombre.label}]]</th>
+                            <th scope="col">[[#{hotel.dirreccion.label}]]</th>
+                            <th scope="col">[[#{hotel.categoria.label}]]</th>
+                            <th scope="col">[[#{hotel.descripcion.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="hotel : ${hotels}">
+                            <td>[[${hotel.id}]]</td>
+                            <td>[[${hotel.nombre}]]</td>
+                            <td>[[${hotel.dirreccion}]]</td>
+                            <td>[[${hotel.categoria}]]</td>
+                            <td>[[${hotel.descripcion}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/hotels/edit/{id}(id=${hotel.id})}" class="btn btn-sm btn-secondary">[[#{hotel.list.edit}]]</a>
+                                    <form th:action="@{/hotels/delete/{id}(id=${hotel.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{hotel.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

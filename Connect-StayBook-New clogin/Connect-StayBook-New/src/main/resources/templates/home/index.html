@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{home.index.headline}]]</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <h1 class="mb-4">[[#{home.index.headline}]]</h1>
+            <p class="mb-5">[(#{home.index.text})]</p>
+            <div class="col-md-4 mb-5">
+                <h4 class="mb-3">[[#{home.index.exploreEntities}]]</h4>
+                <div class="list-group">
+                    <a th:href="@{/administradors}" class="list-group-item list-group-item-action">[[#{administrador.list.headline}]]</a>
+                    <a th:href="@{/usuarios}" class="list-group-item list-group-item-action">[[#{usuario.list.headline}]]</a>
+                    <a th:href="@{/hotels}" class="list-group-item list-group-item-action">[[#{hotel.list.headline}]]</a>
+                    <a th:href="@{/habitacions}" class="list-group-item list-group-item-action">[[#{habitacion.list.headline}]]</a>
+                    <a th:href="@{/clientes}" class="list-group-item list-group-item-action">[[#{cliente.list.headline}]]</a>
+                    <a th:href="@{/reservass}" class="list-group-item list-group-item-action">[[#{reservas.list.headline}]]</a>
+                    <a th:href="@{/pagoss}" class="list-group-item list-group-item-action">[[#{pagos.list.headline}]]</a>
+                    <a th:href="@{/detallesResrvas}" class="list-group-item list-group-item-action">[[#{detallesResrva.list.headline}]]</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{detallesResrva.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{detallesResrva.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/detallesResrvas}" class="btn btn-secondary">[[#{detallesResrva.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('detallesResrva')}" />
+            <form th:action="${requestUri}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='detallesResrva', field='tipoHabitacion')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='detallesResrva', field='precioTotal')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='detallesResrva', field='serviciosIncluidos', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='detallesResrva', field='habitacion', type='select')}" />
+                <input type="submit" th:value="#{detallesResrva.add.headline}" class="btn btn-primary mt-4" / >
+            </form>
+        </div>
+    </body>
+</html>

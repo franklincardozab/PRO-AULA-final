@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{detallesResrva.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{detallesResrva.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/detallesResrvas/add}" class="btn btn-primary ms-2">[[#{detallesResrva.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${detallesResrvas.empty}">[[#{detallesResrva.list.empty}]]</div>
+            <div th:if="${!detallesResrvas.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{detallesResrva.id.label}]]</th>
+                            <th scope="col">[[#{detallesResrva.tipoHabitacion.label}]]</th>
+                            <th scope="col">[[#{detallesResrva.precioTotal.label}]]</th>
+                            <th scope="col">[[#{detallesResrva.habitacion.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="detallesResrva : ${detallesResrvas}">
+                            <td>[[${detallesResrva.id}]]</td>
+                            <td>[[${detallesResrva.tipoHabitacion}]]</td>
+                            <td>[[${detallesResrva.precioTotal}]]</td>
+                            <td>[[${detallesResrva.habitacion}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/detallesResrvas/edit/{id}(id=${detallesResrva.id})}" class="btn btn-sm btn-secondary">[[#{detallesResrva.list.edit}]]</a>
+                                    <form th:action="@{/detallesResrvas/delete/{id}(id=${detallesResrva.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{detallesResrva.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
